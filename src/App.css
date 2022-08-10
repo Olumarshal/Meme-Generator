@@ -48,3 +48,7 @@ main {
     border: none;
     cursor: pointer;
 }
+
+.meme__image {
+    max-width: 100%;
+}
