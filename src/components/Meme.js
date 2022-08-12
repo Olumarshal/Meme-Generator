@@ -40,11 +40,16 @@ function Meme() {
                     />
                 <button
                     className="form__button"
-                    onClick={getMemeImage}>
+                    onClick={getMemeImage}
+                    >
                     Get a new meme image 🖼
                     </button>
             </div>
+            <div className="meme">
             <img src={meme.randomImage} className="meme__image" alt="" />
+            <h2 className="meme__text top">One does not simply</h2>
+            <h2 className="meme __text bottom">Walk into Mordor</h2>
+            </div>
         </main>
     )
 }
