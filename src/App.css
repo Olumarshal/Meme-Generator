@@ -30,6 +30,7 @@ main {
     display: grid;
     grid-template: 40px 40px / 1fr 1fr;
     gap: 17px;
+    margin-bottom: 17px;
 }
 
 .form__input {
@@ -63,7 +64,7 @@ main {
     width: 80%;
     text-align: center;
     left: 50%;
-    transform: translateX (-50%);
+    transform: translateX(-50%);
     margin: 15px 0;
     padding: 0 5px;
     font-family: impact, sans-serif;

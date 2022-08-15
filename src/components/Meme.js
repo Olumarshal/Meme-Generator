@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import memesData from "../memesData.js";
 
 function Meme() {
   const [meme, setMeme] = React.useState({
@@ -9,14 +8,22 @@ function Meme() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
 
-  const [allMemeImages, setAllMemeImages] = React.useState(memesData);
+  const [allMemes, setAllMemes] = React.useState([]);
 
-  const [memeImage, setMemeImage] = React.useState("");
+  React.useEffect(() => {
+    async function getMemes() {
+        const res = await fetch("https://api.imgflip.com/get_memes")
+        const data = await res.json()
+        setAllMemes(data.data.memes)
+    }
+    getMemes()
+
+    }, [])
+    
 
   function getMemeImage() {
-    const memesArray = memesData.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const url = memesArray[randomNumber].url;
+    const randomNumber = Math.floor(Math.random() * allMemes.length);
+    const url = allMemes[randomNumber].url
     setMeme(prevMeme => ({
       ...prevMeme,
       randomImage: url,
@@ -40,7 +47,7 @@ function Meme() {
             className="form__input"
             name="topText"
             value={meme.topText}
-            onchange={handleChange} 
+            onChange={handleChange} 
             />
         <input 
             type="text" 
@@ -63,7 +70,7 @@ function Meme() {
         <h2 className="meme__text bottom">{meme.bottomText}</h2>
       </div>
     </main>
-  );
+  )
 }
 
 export default Meme;
