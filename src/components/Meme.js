@@ -17,25 +17,50 @@ function Meme() {
     const memesArray = memesData.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
     const url = memesArray[randomNumber].url;
-    setMeme((prevMeme) => ({
+    setMeme(prevMeme => ({
       ...prevMeme,
       randomImage: url,
     }));
   }
 
+  function handleChange(event) {
+    const {name, value} = event.target
+    setMeme(prevMeme => ({
+        ...prevMeme,
+        [name]: value
+    }))
+  }
+
   return (
     <main>
       <div className="form">
-        <input type="text" placeholder="Top text" className="form__input" />
-        <input type="text" placeholder="Bottom text" className="form__input" />
-        <button className="form__button" onClick={getMemeImage}>
+        <input 
+            type="text" 
+            placeholder="Top text" 
+            className="form__input"
+            name="topText"
+            value={meme.topText}
+            onchange={handleChange} 
+            />
+        <input 
+            type="text" 
+            placeholder="Bottom text" 
+            className="form__input"
+            name="bottomText"
+            value={meme.bottomText} 
+            onChange={handleChange}
+            />
+        <button 
+            className="form__button" 
+            onClick={getMemeImage}
+            >
           Get a new meme image 🖼
         </button>
       </div>
       <div className="meme">
         <img src={meme.randomImage} className="meme__image" alt="" />
-        <h2 className="meme__text top">One does not simply</h2>
-        <h2 className="meme__text bottom">Walk into Mordor</h2>
+        <h2 className="meme__text top">{meme.topText}</h2>
+        <h2 className="meme__text bottom">{meme.bottomText}</h2>
       </div>
     </main>
   );
